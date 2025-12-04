@@ -16,7 +16,7 @@ imageSources.forEach(src => {
     particleImages.push(img);
 });
 
-
+//hshshshshshshshhsajsweghjwetyeyrehthrhjhjabhjsbsjwbhjbjbhwbhjhehberbhjrbhshbghdgrgvrgvegvevgvegegegetkhjthrhrheghjrhh aka particles     
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -81,3 +81,70 @@ window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 });
+
+
+const playlist = [
+    'B2.mp3',
+];
+
+// Initialize the audio element
+const audioPlayer = new Audio();
+let currentTrackIndex = 0;
+
+function playNextTrack() {
+    if (currentTrackIndex < playlist.length) {
+        audioPlayer.src = playlist[currentTrackIndex];
+        const playPromise = audioPlayer.play();
+
+        // Display the file name in the div
+        const songNameDiv = document.getElementById('songname');
+        const fileName = playlist[currentTrackIndex].split('/').pop();
+        songNameDiv.textContent = `Now playing: ${fileName}`;
+
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // playback started successfully
+                console.log(`Now playing: ${playlist[currentTrackIndex]}`);
+            }).catch((err) => {
+                // Autoplay blocked; show a click-to-play hint
+                console.warn('Autoplay prevented:', err);
+                songNameDiv.textContent = `Click anywhere to play: ${fileName}`;
+                const resumeHandler = () => {
+                    audioPlayer.play().then(() => {
+                        songNameDiv.textContent = `Now playing: ${fileName}`;
+                        document.removeEventListener('click', resumeHandler);
+                    }).catch(() => {});
+                };
+                document.addEventListener('click', resumeHandler);
+            });
+        }
+
+        currentTrackIndex++;
+    } else {
+        currentTrackIndex = 0;
+        playNextTrack();
+    }
+}
+
+audioPlayer.addEventListener('ended', () => {
+    playNextTrack();
+});
+
+// If the previous page requested playback, start automatically.
+if (sessionStorage.getItem('playOnLoad') === '1') {
+    // Clear the flag so reloads don't auto-play again
+    sessionStorage.removeItem('playOnLoad');
+    playNextTrack();
+}
+
+audioPlayer.addEventListener('error', (e) => {
+    console.error("Error playing audio:", e);
+    // Try to advance to next track on error
+    playNextTrack();
+});
+(function(){
+	// Press Escape to go back
+	document.addEventListener('keydown', (e)=>{
+		if (e.key === 'Escape') window.location.href = 'index.html';
+	});
+})();
