@@ -1,0 +1,77 @@
+*{box-sizing:border-box}
+html,body{
+    height:100%;
+    margin:0
+}
+body{
+    background:#000;color:#fff;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    padding:0
+}
+
+.credits-container{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+.back{position:fixed;
+    left:18px;
+    top:18px;
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    padding:8px 12px;
+    border-radius:6px;
+    background:rgba(255,255,255,0.03);
+}
+
+.credits-viewport{width:100%;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+}
+.credits-scroller{
+    display:block;
+    width:100%;
+    max-width:800px;
+    padding:40px 20px
+}
+.credits-block{
+    display:block;
+    text-align:center;
+}
+.credits-block h2{
+    font-size:50px;
+    margin:18px 0 8px;
+}
+.credits-block p{
+    margin:20px 0;
+    font-size:20px;
+    color:#ddd;
+}
+.spacer{
+    height:30vh;
+}
+.credits-scroller{
+    animation:scrollUp 10s linear infinite;
+}
+
+@keyframes scrollUp{
+	0%{transform:translateY(0)}
+	100%{transform:translateY(-50%)}
+}
+
+@media (max-width:520px){
+	.credits-block h1{
+        font-size:32px;
+    }
+	.credits-block p{
+        font-size:18px;
+    }
+}
+

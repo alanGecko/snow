@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #000000 0%, #363636 100%);
+            font-family: Arial, sans-serif;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        a.big-button {
+            display: inline-block;
+            padding: 40px 80px;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            background-color: #1900ff;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        a.big-button:hover {
+            background-color: #01629b;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        a.big-button:active {
+            transform: scale(0.98);
+        }
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <h2>I had to make a big button because of CORS. Click it</h2>
+        <a href="holidays.html" class="big-button" id="startButton" onclick="sessionStorage.setItem('playOnLoad','1');">BIG BUTTON</a><br>
+        <button onclick="window.location.href='credits.html';" class="big-button" style="margin-top: 20px; padding: 20px 40px; font-size: 24px;">Credits</button>
+    </div>
+</body>
+</html>
